@@ -1,0 +1,52 @@
+const Discord = require("discord.js");
+const client = new Discord.Client();
+
+client.on("ready", () => {
+  console.log("Leggo!");
+});
+
+client.on('unhandledRejection', (reason) => {
+  console.error(reason);
+  client.exit(1);
+});
+
+client.on('guildMemberAdd', (member) => {
+  const channel = member.guild.channels.find('name', 'member-log');
+  if (!channel) return;
+  // Send the message, mentioning the member
+  channel.send(`Welcome to the lair, ${member}, I'm ready to be dominated :heart:`);
+});
+
+client.on("message", (message) => {
+	const usage = '!ping';
+	const description = 'Test whether the bot is responsive';
+	const inchat = message.content.split(" ");
+    if (message.content.startsWith("!ping")) {
+		if (inchat[1] == 'help') {
+			message.author.send(`Command Usage: ${usage}\nDescription: ${description}`);} 
+		else if (inchat.length == 1){
+	    	message.channel.send("pong!");
+		}}
+});
+
+client.on("message", (message) => {
+	const usage = '!ping';
+	const description = 'Test whether the bot is responsive';
+	const inchat = message.content.split(" ");
+    if (message.content.startsWith("!ping")) {
+		if (inchat[1] == 'help') {
+			message.author.send(`Command Usage: ${usage}\nDescription: ${description}`);} 
+		else if (inchat.length == 1){
+	    	message.channel.send("pong!");
+		}}
+});
+
+
+// Assign Time Role
+client.on("message", (message) => {
+	if (message.content.startsWith("!assign")) {
+		message.channel.send('lol');
+	}
+});
+
+client.login("Token");
